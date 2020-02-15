@@ -1,13 +1,13 @@
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
-        if len(s)==0:
-            return 0
-        from itertools import combinations
-        
-        comb=list(set(s[x:y] for x, y in combinations((range(len(s)+1)),r=2)))
-        
-        comb.sort(key=len)
-        
-        for x in comb[::-1]:
-            if len(set(x))==len(x):
-                return len(x)
+		n=len(s)
+		i=0
+		a=0
+		d={}
+		for j in range(n):
+			if s[j] in d:
+				i=max(d[s[j]],i)
+			a=max(a,j-i+1)
+			d[s[j]]=j+1
+		return a
+	
